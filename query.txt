@@ -1,0 +1,33 @@
+CREATE TABLE [dbo].[Categories](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Category] [nvarchar](max) NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+CREATE TABLE [dbo].[Product_Category](
+	[Product] [int] NOT NULL,
+	[Category] [int] NOT NULL
+) ON [PRIMARY]
+GO
+CREATE TABLE [dbo].[Products](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Product] [nvarchar](max) NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[Cateries] ON 
+
+INSERT [dbo].[Categories] ([id], [Category]) VALUES (1, N'Категория 1')
+INSERT [dbo].[Categories] ([id], [Category]) VALUES (2, N'Категория 2')
+INSERT [dbo].[Categories] ([id], [Category]) VALUES (3, N'Категория 3')
+INSERT [dbo].[Product_Category] ([Product], [Category]) VALUES (1, 1)
+INSERT [dbo].[Product_Category] ([Product], [Category]) VALUES (1, 2)
+INSERT [dbo].[Product_Category] ([Product], [Category]) VALUES (2, 2)
+INSERT [dbo].[Products] ([id], [Product]) VALUES (1, N'Продукт 1')
+INSERT [dbo].[Products] ([id], [Product]) VALUES (2, N'Продукт 2')
+INSERT [dbo].[Products] ([id], [Product]) VALUES (3, N'Продукт 3')
+
+SELECT p.Product, c.Categoty
+FROM Products P
+LEFT JOIN Product_Category PC
+ON P.Id = PC.Product
+LEFT JOIN Categories C
+ON PC.Category = C.Id;
